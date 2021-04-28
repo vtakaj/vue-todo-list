@@ -15,26 +15,27 @@
     </ul>
 </template>
 <script>
+// import _ from "lodash"
 export default {
     data() {
         const todoItems = [
             { id: 1, done: false, text: 'Go out to sea' },
-            { id: 2, done: false, text: 'Invite the first member' }
+            { id: 2, done: false, text: 'Invite the first member' },
         ]
         return { 
             inputValue: '',
             todoItems,
-            filteredToDoItems: todoitems, 
+            filteredTodoItems: todoItems,
             filterValue: '',
         }
     },
     watch: {
         // filterValueの値の変更を監視し
         // filteredTodoItemsを再計算する
-        fiteredValue() {
+        filterValue() {
             this.updateFilteredTodoItems()
         },
-        // TtpdpOte,sの値の変更を監視し
+        // todoItemsの値の変更を監視し
         // filteredTodoItemsを再計算する
         todoItems: {
             handler() {
@@ -49,10 +50,22 @@ export default {
             // 入力をリストに追加
             this.todoItems.push({
                 id: this.todoItems.length + 1,
+                done: false,
                 text: this.inputValue
             })
             // 入力をクリアする
             this.inputValue = ''
+        },
+        // filteredTodoItemsに
+        // 再計算した配列を与える
+        updateFilteredTodoItems() {
+            this.filteredTodoItems = //_.debounce(function() {
+                this.filterValue
+                    ? this.todoItems.filter((todo) =>
+                        todo.text.includes(this.filterValue)
+                    )
+                    : this.todoItems
+            //}, 500)
         }
     }
 }
