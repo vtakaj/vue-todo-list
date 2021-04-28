@@ -15,7 +15,7 @@
     </ul>
 </template>
 <script>
-// import _ from "lodash"
+import _ from "lodash"
 export default {
     data() {
         const todoItems = [
@@ -58,15 +58,14 @@ export default {
         },
         // filteredTodoItemsに
         // 再計算した配列を与える
-        updateFilteredTodoItems() {
-            this.filteredTodoItems = //_.debounce(function() {
+        updateFilteredTodoItems: _.debounce(function() {
+            this.filteredTodoItems = 
                 this.filterValue
                     ? this.todoItems.filter((todo) =>
                         todo.text.includes(this.filterValue)
                     )
                     : this.todoItems
-            //}, 500)
-        }
+        }, 500 /* 500ミリ秒遅延させる */)
     }
 }
 </script>
