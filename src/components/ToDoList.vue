@@ -7,18 +7,20 @@
         v-model="filterValue"
         placeholder="フィルタテキスト">
     <ul>
-        <li v-for="todo in filteredTodoItems"
+        <ToDoItem
+            v-for="todo in filteredTodoItems"
             v-bind:key="todo.id"
-            class="todo-item"
-            v-bind:class="{'done': todo.done}"
-            v-on:click="todo.done = !todo.done">
-            <span v-if="todo.done">✔</span> {{ todo.text }}
-        </li>
+            v-bind:text="todo.Text"
+            v-bind:done="todo.done"
+            v-on:toggle="todo.done = !todo.done"
+        </>
     </ul>
 </template>
 <script>
-import _ from "lodash"
+import ToDoItem from './ToDoItem.vue'
+
 export default {
+    components: { ToDoItem },
     data() {
         const todoItems = [
             { id: 1, done: false, text: 'Go out to sea' },
