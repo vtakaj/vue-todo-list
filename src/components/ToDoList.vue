@@ -31,21 +31,15 @@ export default {
             filterValue: '',
         }
     },
-    watch: {
-        // filterValueの値の変更を監視し
-        // filteredTodoItemsを再計算する
-        filterValue() {
-            this.updateFilteredTodoItems()
-        },
-        // todoItemsの値の変更を監視し
-        // filteredTodoItemsを再計算する
-        todoItems: {
-            handler() {
-                this.updateFilteredTodoItems()
-            },
-            // 深く監視すすことで配列要素の変更も監視する
-            deep: true
-        },
+    computed: {
+        filteredTodoItems() {
+            if (!this.filterValue) {
+                return this.todoItems
+            }
+            return this.todoItems.filter((todo) => {
+                return todo.text.includes(this.filterValue)
+            })
+        }
     },
     methods: {
         handleClick() {
@@ -58,16 +52,6 @@ export default {
             // 入力をクリアする
             this.inputValue = ''
         },
-        // filteredTodoItemsに
-        // 再計算した配列を与える
-        updateFilteredTodoItems: _.debounce(function() {
-            this.filteredTodoItems = 
-                this.filterValue
-                    ? this.todoItems.filter((todo) =>
-                        todo.text.includes(this.filterValue)
-                    )
-                    : this.todoItems
-        }, 500 /* 500ミリ秒遅延させる */)
     }
 }
 </script>
