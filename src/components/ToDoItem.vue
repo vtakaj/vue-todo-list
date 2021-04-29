@@ -2,22 +2,18 @@
     <li class="todo-item"
         v-bind:class="{'done': done}"
         v-on:click="handleClick">
-        <span v-if="done">✔</span> {{ text }}
+        <span v-if="done">✔</span>
+        <!-- {{ text }}を<slot/>に置換 -->
+        <slot />
     </li>
 </template>
 <script>
 export default {
     props: {
-        /** ToDoのコンテンツを指定するProp */
-        text: {
-            // text は文字列 でなければなりません
-            type: String
-        },
+        /** Text Prop は使用しないので削除する */
+        text: { type: String },
         /** Todo の完了ステータスを指定するProp */
-        done: {
-            // done は 真偽値 でなければなりません
-            type: Boolean
-        }
+        done: { type: Boolean }
     },
     emits: ['toggle'],
     methods: {

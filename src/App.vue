@@ -1,5 +1,5 @@
 <template>
-  <!-- ToDoListを私用する -->
+  <!-- ToDoListを使用する -->
   <ToDoList />
 </template>
 <script>

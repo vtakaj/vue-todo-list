@@ -2,18 +2,18 @@
     <input v-model="inputValue">
     <button v-on:click="handleClick">
         ToDoを追加
-    </button>
-    <input
+        </button>
+        <input
         v-model="filterValue"
         placeholder="フィルタテキスト">
     <ul>
         <ToDoItem
             v-for="todo in filteredTodoItems"
             v-bind:key="todo.id"
-            v-bind:text="todo.Text"
             v-bind:done="todo.done"
-            v-on:toggle="todo.done = !todo.done"
-        </>
+            v-on:toggle="todo.done = !todo.done">
+            <b>{{ todo.text }}</b>
+        </ToDoItem>
     </ul>
 </template>
 <script>
